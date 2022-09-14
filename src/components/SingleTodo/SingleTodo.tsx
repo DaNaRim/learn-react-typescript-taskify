@@ -2,33 +2,30 @@ import React, {useEffect, useRef} from "react"
 import {Draggable} from "react-beautiful-dnd"
 import {AiFillDelete, AiFillEdit} from "react-icons/ai"
 import {MdDone} from "react-icons/md"
-import {Todo} from "../todoModel"
+import {useDispatch} from "react-redux"
+import {deleteTodoAction, doneTodoAction, editTodoAction} from "../../redux/todoReducer/todoActions"
 
 import "./SingleTodo.css"
+import Todo from "../../redux/todoReducer/todoModel"
 
 type Props = {
     index: number;
     todo: Todo;
-    todos: Todo[];
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
+const SingleTodo: React.FC<Props> = ({index, todo}) => {
+    const dispatch = useDispatch()
 
     const [edit, setEdit] = React.useState<boolean>(false)
     const [editTodo, setEditTodo] = React.useState<string>(todo.todo)
 
-    const handleDone = (id: number) => {
-        setTodos(todos.map(item => item.id === id ? {...item, isDone: !item.isDone} : item))
-    }
+    const handleDone = () => dispatch(doneTodoAction(todo.id))
 
-    const handleDelete = (id: number) => {
-        setTodos(todos.filter(item => item.id !== id))
-    }
+    const handleDelete = () => dispatch(deleteTodoAction(todo.id))
 
-    const handleEdit = (e: React.FormEvent<HTMLFormElement>, id: number) => {
+    const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setTodos(todos.map(item => item.id === id ? {...item, todo: editTodo} : item))
+        dispatch(editTodoAction({...todo, todo: editTodo}))
         setEdit(false)
     }
 
@@ -40,7 +37,7 @@ const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
         <Draggable draggableId={todo.id.toString()} index={index}>
             {(provided, snapshot) => (
                 <form className={`todo__single ${snapshot.isDragging ? "dragging" : ""}`}
-                      onSubmit={e => handleEdit(e, todo.id)}
+                      onSubmit={handleEdit}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}>
@@ -56,8 +53,8 @@ const SingleTodo: React.FC<Props> = ({index, todo, todos, setTodos}) => {
                 <span className="icon" onClick={() => {
                     if (!edit && !todo.isDone) setEdit(!edit)
                 }}><AiFillEdit/></span>
-                        <span className="icon" onClick={() => handleDelete(todo.id)}><AiFillDelete/></span>
-                        <span className="icon" onClick={() => handleDone(todo.id)}><MdDone/></span>
+                        <span className="icon" onClick={handleDelete}><AiFillDelete/></span>
+                        <span className="icon" onClick={handleDone}><MdDone/></span>
                     </div>
                 </form>
             )}
