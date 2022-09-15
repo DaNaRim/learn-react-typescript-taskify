@@ -4,19 +4,11 @@ import Todo from "./todoModel"
 export interface TodosState {
     todos: Todo[]
     completedTodos: Todo[]
-
-    isInit: boolean
-    loading: boolean
-    error: string | null
 }
 
 const initialState: TodosState = {
     todos: [],
     completedTodos: [],
-
-    isInit: false,
-    loading: false,
-    error: null,
 }
 
 const {ADD_TODO, EDIT_TODO, DELETE_TODO, DONE_TODO, MOVE_TO_COMPLETED, REMOVE_FROM_COMPLETED} = TodoActionTypes
