@@ -1,5 +1,6 @@
 .todo__single {
     display: flex;
+    justify-content: space-between;
     width: 90%;
     margin: 15px auto 0;
     padding: 20px;
@@ -12,15 +13,21 @@
     box-shadow: 0 0 5px black;
 }
 
-.dragging {
+.todo__single.dragging {
     box-shadow: 0 0 20px black;
 }
 
 .todo__single__text {
     font-size: 20px;
     flex: 1;
+    max-width: 80%;
     padding: 5px;
     border: none;
+    border-radius: 5px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word;
+    height: fit-content;
 }
 
 .todos__single--text:focus {

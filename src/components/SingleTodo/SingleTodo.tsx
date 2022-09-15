@@ -51,6 +51,7 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
     const getTodoContent = () => {
         if (isEditing) {
             return <input type="text"
+                          className="todo__single__text"
                           ref={inputRef}
                           value={editTodo}
                           onChange={e => setEditTodo(e.target.value)}
