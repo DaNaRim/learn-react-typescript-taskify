@@ -1,6 +1,6 @@
 interface Todo {
     id: number;
-    todo: string;
+    text: string;
     isDone: boolean;
 }
 

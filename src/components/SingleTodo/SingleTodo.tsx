@@ -17,7 +17,7 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
     const dispatch = useDispatch()
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
-    const [editTodo, setEditTodo] = useState<string>(todo.todo)
+    const [editTodo, setEditTodo] = useState<string>(todo.text)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -37,14 +37,14 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
         if (e?.type === "keydown" && (e as React.KeyboardEvent<HTMLInputElement>).key !== "Escape") return
 
         setIsEditing(false)
-        setEditTodo(todo.todo)
+        setEditTodo(todo.text)
     }
 
     const handleUpdate = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
         if (!isEditing) return
 
         e.preventDefault()
-        dispatch(editTodoAction({...todo, todo: editTodo}))
+        dispatch(editTodoAction({...todo, text: editTodo}))
         setIsEditing(false)
     }
 
@@ -57,9 +57,9 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
                           onChange={e => setEditTodo(e.target.value)}
                           onKeyDown={e => handleCancelEdit(e)}/>
         } else if (todo.isDone) {
-            return <s className="todo__single__text">{todo.todo}</s>
+            return <s className="todo__single__text">{todo.text}</s>
         } else {
-            return <span className="todo__single__text">{todo.todo}</span>
+            return <span className="todo__single__text">{todo.text}</span>
         }
     }
 

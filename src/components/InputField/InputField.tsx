@@ -7,14 +7,14 @@ import "./InputField.css"
 const InputField: React.FC = () => {
     const dispatch = useDispatch()
 
-    const [todo, setTodo] = useState<string>("")
+    const [todoText, setTodoText] = useState<string>("")
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (todo) {
-            dispatch(addTodoAction({id: Date.now(), todo, isDone: false}))
-            setTodo("")
+        if (todoText) {
+            dispatch(addTodoAction({id: Date.now(), text: todoText, isDone: false}))
+            setTodoText("")
         }
     }
 
@@ -29,8 +29,8 @@ const InputField: React.FC = () => {
                    className="input__box"
                    placeholder="Enter a task"
                    ref={inputRef}
-                   value={todo}
-                   onChange={e => setTodo(e.target.value)}/>
+                   value={todoText}
+                   onChange={e => setTodoText(e.target.value)}/>
             <button type="submit" className="input_submit">Add</button>
         </form>
     )
