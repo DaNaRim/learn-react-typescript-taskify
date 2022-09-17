@@ -1,12 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+html, body {
+    overflow: overlay;
+    height: 100%;
+}
+
 .App {
     font-family: "Neucha", cursive;
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    height: inherit;
+    padding-bottom: 40px;
     background-color: #2f74c0;
 }
 
