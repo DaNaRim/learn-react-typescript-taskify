@@ -21,13 +21,13 @@
     font-size: 20px;
     flex: 1;
     max-width: 80%;
+    height: fit-content;
     padding: 5px;
     border: none;
     border-radius: 5px;
     outline: none;
     background: rgba(0, 0, 0, 0.1);
     overflow-wrap: break-word;
-    height: fit-content;
 }
 
 .todos__single--text:focus {
