@@ -2,9 +2,8 @@ import React, {useEffect, useRef, useState} from "react"
 import {Draggable} from "react-beautiful-dnd"
 import {AiFillDelete, AiFillEdit} from "react-icons/ai"
 import {MdDone, MdOutlineClose} from "react-icons/md"
-import {useDispatch} from "react-redux"
-import {deleteTodoAction, doneTodoAction, editTodoAction} from "../../redux/todoReducer/todoActions"
-import Todo from "../../redux/todoReducer/todoModel"
+import {useAppDispatch} from "../../../app/hooks"
+import {Todo, todoComplete, todoDeleted, todoUpdated} from "../../../features/todos/todosSlice"
 
 import "./SingleTodo.css"
 
@@ -14,7 +13,7 @@ type Props = {
 }
 
 const SingleTodo: React.FC<Props> = ({index, todo}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [isEditing, setIsEditing] = useState<boolean>(false)
     const [editTodo, setEditTodo] = useState<string>(todo.text)
@@ -24,12 +23,12 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
     useEffect(() => inputRef.current?.focus(), [isEditing])
 
 
-    const handleDone = () => dispatch(doneTodoAction(todo.id))
+    const handleDone = () => dispatch(todoComplete({id: todo.id}))
 
-    const handleDelete = () => dispatch(deleteTodoAction(todo.id))
+    const handleDelete = () => dispatch(todoDeleted(todo.id))
 
     const handleEdit = () => {
-        if (!isEditing && !todo.isDone) setIsEditing(!isEditing)
+        if (!isEditing && !todo.isCompleted) setIsEditing(!isEditing)
     }
 
     const handleCancelEdit = (e?: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
@@ -44,7 +43,7 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
         if (!isEditing) return
 
         e.preventDefault()
-        dispatch(editTodoAction({...todo, text: editTodo}))
+        dispatch(todoUpdated({id: todo.id, changes: {text: editTodo}}))
         setIsEditing(false)
     }
 
@@ -56,7 +55,7 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
                           value={editTodo}
                           onChange={e => setEditTodo(e.target.value)}
                           onKeyDown={e => handleCancelEdit(e)}/>
-        } else if (todo.isDone) {
+        } else if (todo.isCompleted) {
             return <s className="todo__single__text">{todo.text}</s>
         } else {
             return <span className="todo__single__text">{todo.text}</span>
@@ -69,6 +68,13 @@ const SingleTodo: React.FC<Props> = ({index, todo}) => {
                 <div className="todo__single__buttons">
                     <span className="icon" title="confirm" onClick={handleUpdate}><MdDone/></span>
                     <span className="icon" title="cancel" onClick={handleCancelEdit}><MdOutlineClose/></span>
+                </div>
+            )
+        } else if (todo.isCompleted) {
+            return (
+                <div>
+                    <span className="icon" title="delete" onClick={handleDelete}><AiFillDelete/></span>
+                    <span className="icon" title="mark as done" onClick={handleDone}><MdDone/></span>
                 </div>
             )
         } else {
