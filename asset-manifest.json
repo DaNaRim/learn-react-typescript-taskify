@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/learn-react-typescript/static/css/main.952796ca.css",
-    "main.js": "/learn-react-typescript/static/js/main.1ed3be11.js",
-    "static/js/787.de8eb1fe.chunk.js": "/learn-react-typescript/static/js/787.de8eb1fe.chunk.js",
-    "index.html": "/learn-react-typescript/index.html",
-    "main.952796ca.css.map": "/learn-react-typescript/static/css/main.952796ca.css.map",
-    "main.1ed3be11.js.map": "/learn-react-typescript/static/js/main.1ed3be11.js.map",
-    "787.de8eb1fe.chunk.js.map": "/learn-react-typescript/static/js/787.de8eb1fe.chunk.js.map"
+    "main.css": "/learn-react-typescript-taskify/static/css/main.952796ca.css",
+    "main.js": "/learn-react-typescript-taskify/static/js/main.560b97cd.js",
+    "static/js/787.de8eb1fe.chunk.js": "/learn-react-typescript-taskify/static/js/787.de8eb1fe.chunk.js",
+    "index.html": "/learn-react-typescript-taskify/index.html",
+    "main.952796ca.css.map": "/learn-react-typescript-taskify/static/css/main.952796ca.css.map",
+    "main.560b97cd.js.map": "/learn-react-typescript-taskify/static/js/main.560b97cd.js.map",
+    "787.de8eb1fe.chunk.js.map": "/learn-react-typescript-taskify/static/js/787.de8eb1fe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.952796ca.css",
-    "static/js/main.1ed3be11.js"
+    "static/js/main.560b97cd.js"
   ]
 }
