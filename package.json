@@ -1,4 +1,5 @@
 {
+  "homepage": "https://DaNaRim.github.io/learn-react-typescript-taskify",
   "name": "learn-react-typescript",
   "version": "0.1.0",
   "private": true,
@@ -23,6 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "eslint-config-react": "^1.1.7",
     "eslint-config-react-app": "^7.0.1"
   }
