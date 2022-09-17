@@ -21,14 +21,13 @@ const TodoList: React.FC = () => {
         }
 
         if (destination.droppableId === source.droppableId) {
-            dispatch(todoMoved({id: Number(draggableId), oldIndex: source.index, newIndex: destination.index}))
+            dispatch(todoMoved({id: Number(draggableId), newIndex: destination.index}))
         } else if (
             destination.droppableId === "TodosList"
             || destination.droppableId === "TodosRemove"
         ) {
             dispatch(todoMoved({
                 id: Number(draggableId),
-                oldIndex: source.index,
                 newIndex: destination.index,
                 isCompleteUpdated: true,
             }))

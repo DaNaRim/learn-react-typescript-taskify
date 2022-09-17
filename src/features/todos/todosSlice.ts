@@ -7,7 +7,7 @@ export type Todo = {
     isCompleted: boolean;
 }
 
-const todosAdapter = createEntityAdapter<Todo>({
+export const todosAdapter = createEntityAdapter<Todo>({
     selectId: (todo) => todo.id,
     sortComparer: (a, b) => {
         if (a.isCompleted !== b.isCompleted) {
@@ -51,11 +51,10 @@ const todosSlice = createSlice({
         },
         todoMoved: (state, action: PayloadAction<{
             id: number,
-            oldIndex: number,
             newIndex: number,
             isCompleteUpdated?: boolean
         }>) => {
-            const {id, oldIndex, newIndex, isCompleteUpdated} = action.payload
+            const {id,  newIndex, isCompleteUpdated} = action.payload
 
             const todo = state.entities[String(id)]
 
@@ -63,6 +62,10 @@ const todosSlice = createSlice({
 
             // @ts-ignore id always exists in state.entities
             const activeTodosIdsLength = state.ids.filter(id => !state.entities[String(id)].isCompleted).length
+
+            const oldIndex = todo.isCompleted
+                ? state.ids.indexOf(todo.id) - activeTodosIdsLength
+                : state.ids.indexOf(todo.id)
 
             if (isCompleteUpdated) {
                 if (todo.isCompleted) {
